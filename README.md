@@ -1,5 +1,4 @@
-# Assignment2
-
+Available here:
 https://sise-web-development-environments.github.io/assignment2-nadav-ziv/
 
 Hi user,
@@ -15,4 +14,4 @@ Extras we added to the game:
 - a clock "food" that, on taking, gives extra time (quarter of original time)- appears when entering last quarter of the original time (hourglass image) 
 
 
-This game designed and coded by Nadav Chapnick (314979774) and Ziv Gura (204612832)
+This game designed and coded by Nadav Chapnick and Ziv Gura, during our studies for B.Sc in Information Systems at Ben-Gurion University, back in 2020.
