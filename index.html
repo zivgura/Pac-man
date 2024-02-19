@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="./js/jquery-3.4.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/app.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+		<!-- <link rel="shortcut icon" href="favicon.ico" /> -->
+		<link rel="icon" type="image/gif" href="./images/favicon.ico">
+	</head>
+	<body>
+		<header>
+			<img class="header" src="./images/header.png"/>
+		</header>
+
+		<nav class="navbar navbar-default navbar-fixed">
+			<div id="menu" class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"></a>
+				</div>
+				<ul class="navbar">
+				<li class="navbar-li"><a onclick="welcome()">Welcome</a></li>
+				<li class="navbar-li"><a onclick="Register()">Register</a></li>
+				<li class="navbar-li"><a class="menuButton" onclick="Login()">Login</a></li>
+				<li class="navbar-li"><a onclick="showAboutModal()">About</a></li>
+				</ul>
+			</div>
+		</nav>
+	
+		<div id="modalWindow" class="modal">
+			<div class="modal-content">
+				<span id="close" class="close">&times;</span>
+				<p>
+					<h3>Our names:</h3> Nadav Chapnick & Ziv Gura
+					<h3>jQuery Plugins we used:</h3> 
+					<ul>
+						<li>jquery.validation for the Form validation</li>
+					</ul>
+					<h3>Difficulties we encountered in the coding process:</h3> 
+					<ul>
+						<li>Form validation</li>
+						<li>CSS designs- locating objects on screen and coloring them the right way</li>
+					</ul>
+					We have not used any tamplates in this work.
+				</p>
+			</div>
+		</div>
+
+
+		<div class="screen" id="gameScreen" align="center">
+			<div id="welcome">
+				<button class="button" id="RegisterPageButton" onclick="Register()">Register</button>
+				<img id="logo" width="50" height="40" src="./images/logo.png"/>
+				<button class="button" id="LoginPageButton" onclick="Login()">Login</button>	
+			</div>
+		</div>
+
+		<div class="screen" id="gameScreen" align="center">
+			<div id="register" style="display: none;">
+				<form class="registerForm" id="registerForm" autocomplete="on">
+					<div class="form-group">
+						<input class="form-text" type="text" placeholder="Full name" id="fullname" name="fullname"/>
+						<small id="invalid-fullname"></small>
+					</div>
+					<div class="form-group">
+							<input class="form-text" type="text" placeholder="User name" id="userReg" name="userReg" />
+							<small id="invalid-userReg"></small>
+					</div>
+					<div class="form-group">
+						<input class="form-text" type="password" placeholder="Password" name="passwordReg" id="passwordReg"/>
+						<small id="invalid-passwordReg"></small>
+					</div>
+					<div class="form-group">
+						<input class="form-text" name="email" type="email" placeholder="Email Address" id="email" />
+						<small id="invalid-email"></small>
+					</div>
+					<div class="form-group">
+						<input class="form-text" type="text" onfocus="(this.type='date')" id="date" placeholder="Date of birth"  name="date"/>
+						<small id="invalid-date"></small>
+					</div>
+						<button type="submit" id="register" onclick="signIn()">Register</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="screen" id="gameScreen" align="center">
+			<div id="login" style="display: none;">
+				<div class="form-group">
+					<input class="form-text" type="text" id="userLogin" name="user" placeholder="User name"><br>
+				</div>
+				<div class="form-group">
+					<input class="form-text" type="password" id="passwordLogin" placeholder="Password" name="Password"><br><br>
+				</div>
+				<button id="LoginGameButton" onclick="AfterLogIn()">Login</button>
+			</div>
+		</div>
+
+		<div class="screen" id="gameScreen" align="center">
+			<div id="settings" style="display: none;">	
+				<fieldset style="border: none;">
+					<!-- <form class="settingsForm" id="settingsForm"> -->
+					<h3 id="headerSettings">Settings</h3>
+					<label>Right key</label>
+					<div class="tooltip">
+						<input id="rKey" onkeydown="keyPressed(id,event)" autocomplete="off">
+						<span class="tooltiptext">Press the key on the keyboard you want to use for this diraction</span>
+					</div>
+					<input class="side-text" type="text" id="rightKey" disabled>
+					<br>
+
+					<label>Left key</label>
+					<div class="tooltip">
+						<input id="lKey" onkeydown="keyPressed(id,event)" autocomplete="off">
+						<span class="tooltiptext">Press the key on the keyboard you want to use for this diraction</span>
+					</div>
+					<input class="side-text" type="text" id="leftKey" disabled>
+					<br>
+
+					<label>Up key</label>
+					<div class="tooltip">
+						<input id="uKey" onkeydown="keyPressed(id,event)" autocomplete="off">
+						<span class="tooltiptext">Press the key on the keyboard you want to use for this diraction</span>
+					</div>
+					<input class="side-text" type="text" id="upKey" disabled>
+					<br>					
+
+
+					<label>Down key</label>
+					<div class="tooltip">
+						<input id="dKey" onkeydown="keyPressed(id,event)" autocomplete="off">
+						<span class="tooltiptext">Press the key on the keyboard you want to use for this diraction</span>
+					</div>
+					<input class="side-text" type="text" id="downKey" disabled>
+					<br>
+
+					<div class="form-group">
+						<label>Total number of balls in game (in range 50-90)</label>
+						<input type="number"  name="totalNumberOfBalls" id="totalNumberOfBalls" min=50 max=90 onfocusout="validateSettings(name)">
+					</div>
+					<div class="form-group">
+						<label>Color of 5 points balls</label>
+						<input type="color" id="lowPointsColor" value="#704f50">
+					</div>
+					<div class="form-group">
+						<label>Color of 15 points balls</label>
+						<input type="color" id="mediumPointsColor" value="#f0a979">
+					</div>
+					<div class="form-group">
+						<label>Color of 25 points balls</label>
+						<input type="color" id="highPointsColor" value="#f9f0af"> 
+					</div>
+					<div class="form-group">
+						<label>Total number of monsters in game (in range 1-4)</label>
+						<input type="number" name="totalNumberOfMonsters" id="totalNumberOfMonsters" min=1 max=4 onfocusout="validateSettings(name)">
+					</div>
+					<div class="form-group">
+						<label>Game duration in seconds (minimum 60)</label>
+						<input type="number" name="timeforgame" id="timeforgame" min=60 onfocusout="validateSettings(name)">
+					</div>
+					<button id="random" onclick="randomFromUser()">Random</button>
+					<button id="save" type="submit" onclick="ShowGame()" disabled>Save</button>
+					<!-- </form> -->
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="screen" id="gameScreen">
+			<table>
+				<td>
+					<ul id="sideList">
+						<li class="sideBar">
+							<div id="userName" style="display: none;">
+								<label for="lblUserName">USER:</label>
+								<input class="side-text" id="lblUserName" type="text" />
+							</div>
+						</li>
+						<li class="sideBar">
+							<div id="lifes" style="display: none;">
+								<label for="life" style="display: inline;">LIFES:</label>
+								<ul id="lifesIcons" class="lifes-section" style="display: none;"></ul>
+								<!-- <input class="side-text" id="lbllife" type="text" /> -->
+							</div>
+						</li>
+						<li class="sideBar">	
+							<div id="score" style="display: none;">
+								<label for="lblScore">SCORE:</label>
+								<input class="side-text" id="lblScore" type="text" value="0" />
+							</div>
+						</li>
+						<li class="sideBar">
+							<div id="time" style="display: none;">
+								<label for="lblTime">TIME:</label>
+								<input class="side-text" id="lblTime" type="text"/>
+							</div>
+						</li>
+						<li class="sideBar">
+							<div id="newGame" style="display: none;">
+								<button id="newGame" onclick="newGame()">New Game</button>
+							</div>
+						</li>
+					</ul>
+				</td>
+				<td>
+					<div id="game" style="display: none;">
+						<canvas id="canvas" height="500" width="700"></canvas>
+					</div>
+				</td>
+			</table>
+		</div>
+
+		<audio id="deathSound">
+			<source src="sounds/pacman_death.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="beginningSound">
+			<source src="sounds/pacman_beginning.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="chompSound">
+			<source src="sounds/pacman_chomp.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="specialSound">
+			<source src="sounds/pacman_eatfruit.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="winningSound">
+			<source src="sounds/pacman_win.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="gameOverSound">
+			<source src="sounds/pacman_gameover.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+
+		<footer>
+			<div class="footer" id="footer">
+				<p class="desfooter" id="desfooter">All Rights Reserved to Nadav Chapnick & Ziv Gura <br> Contact us: chapnick@post.bgu.ac.il , zivgur@post.bgu.ac.il </p>
+			</div>
+		</footer>
+	</body>
+</html>
